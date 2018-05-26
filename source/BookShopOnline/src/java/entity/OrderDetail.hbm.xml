@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 25, 2018 11:12:05 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.OrderDetail" table="OrderDetail" schema="dbo" catalog="BookShopJ2eeDb" optimistic-lock="version">
+        <composite-id name="id" class="entity.OrderDetailId">
+            <key-property name="orderId" type="int">
+                <column name="OrderID" />
+            </key-property>
+            <key-property name="bookId" type="int">
+                <column name="BookID" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="book" class="entity.Book" update="false" insert="false" fetch="select">
+            <column name="BookID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="orderHistory" class="entity.OrderHistory" update="false" insert="false" fetch="select">
+            <column name="OrderID" not-null="true" />
+        </many-to-one>
+        <property name="quanlity" type="int">
+            <column name="Quanlity" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 25, 2018 11:12:05 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Publisher" table="Publisher" schema="dbo" catalog="BookShopJ2eeDb" optimistic-lock="version">
+        <id name="publisherId" type="int">
+            <column name="PublisherID" />
+            <generator class="assigned" />
+        </id>
+        <property name="publisherName" type="serializable">
+            <column name="PublisherName" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

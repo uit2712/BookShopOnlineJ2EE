@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 25, 2018 11:12:05 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.OrderHistory" table="OrderHistory" schema="dbo" catalog="BookShopJ2eeDb" optimistic-lock="version">
+        <id name="orderId" type="int">
+            <column name="OrderID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="user" class="entity.User" fetch="select">
+            <column name="Username" />
+        </many-to-one>
+        <property name="orderDate" type="timestamp">
+            <column name="OrderDate" length="23" not-null="true" />
+        </property>
+        <property name="deliveryDate" type="timestamp">
+            <column name="DeliveryDate" length="23" />
+        </property>
+        <property name="checkOut" type="boolean">
+            <column name="CheckOut" not-null="true" />
+        </property>
+        <property name="isCart" type="boolean">
+            <column name="IsCart" not-null="true" />
+        </property>
+        <set name="orderDetails" table="OrderDetail" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="OrderID" not-null="true" />
+            </key>
+            <one-to-many class="entity.OrderDetail" />
+        </set>
+    </class>
+</hibernate-mapping>

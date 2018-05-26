@@ -1,0 +1,71 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- Author: Administrator -->
+ 
+<struts>
+    <!-- Configuration for the default package. -->
+    <constant name="struts.devMode" value="false" />
+    <!--Cho phép gọi nhiều action trong 1 form-->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    
+    <package name="default" extends="struts-default" namespace="/">
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+        </result-types>
+        
+        <!--START Đăng ký-->
+        <action name="register" class="action.register.RegisterAction" method="register">
+            <result name="success" type="tiles">account.register</result>
+            <result name="input" type="tiles">account.register</result>
+        </action>
+        
+        <action name="register-view" class="action.register.RegisterAction">
+            <result name="success" type="tiles">account.register</result>
+        </action>
+        <!--END Đăng ký-->
+        
+        <!--START Home-->
+        <action name="home" class="action.HomeAction">
+            <result name="success" type="tiles">home.index</result>
+        </action>
+        <!--END Home-->
+        
+        <!--START Login-->
+        <action name="login" class="action.login.LoginAction" method="login"> 
+            <result name="success" type="redirectAction">home</result>
+            <result name="input" type="tiles">account.login</result>
+        </action>
+        
+        <action name="login-view" class="action.login.LoginViewAction"> 
+            <result name="success" type="tiles">account.login</result>
+        </action>
+        <!--END Login-->
+        
+        <!--START LogOff-->
+        <action name="logOff" class="action.login.LoginAction" method="logOff">
+            <result name="success" type="redirectAction">home</result>
+        </action>
+        <!--END LogOff-->
+        
+        <!--START GetCategory-->
+        <action name="getCategory" class="action.GetCategoryAction" method="getCategory">
+            <result name="success">topMenu.jsp</result>
+        </action>
+        <!--END GetCategory-->
+        
+        <!--START GetProductsInCategory-->
+        <action name="getProductsInCategory" class="action.GetBooksInCategory" method="getProductsInCategory">
+            <result name="success">_prodsInCate.jsp</result>
+        </action>
+        <!--END GetProductsInCategory-->
+        
+        <!--START GetBookDetail-->
+        <action name="getBookDetail" class="action.ShowBookDetail" method="getBookDetail">
+            <result name="success" type="tiles">book.detail</result>
+            <result name="error" type="tiles">error.pageNotFound</result>
+        </action>
+        <!--END GetBookDetail-->
+    </package>
+</struts>

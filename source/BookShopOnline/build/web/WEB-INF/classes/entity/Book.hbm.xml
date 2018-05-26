@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 25, 2018 11:12:05 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Book" table="Book" schema="dbo" catalog="BookShopJ2eeDb" optimistic-lock="version">
+        <id name="bookId" type="int">
+            <column name="BookID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="user" class="entity.User" fetch="select">
+            <column name="Username" />
+        </many-to-one>
+        <property name="bookName" type="string">
+            <column name="BookName" not-null="true" />
+        </property>
+        <property name="author" type="string">
+            <column name="Author" not-null="true" />
+        </property>
+        <property name="describe" type="string">
+            <column name="Describe" not-null="true" />
+        </property>
+        <property name="price" type="long">
+            <column name="Price" not-null="true" />
+        </property>
+        <property name="inventoryNumber" type="int">
+            <column name="InventoryNumber" not-null="true" />
+        </property>
+        <property name="publisher" type="string">
+            <column name="Publisher" />
+        </property>
+        <property name="image" type="string">
+            <column name="Image" not-null="true" />
+        </property>
+        <property name="categoryId" type="java.lang.Integer">
+            <column name="CategoryID" />
+        </property>
+        <set name="orderDetails" table="OrderDetail" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="BookID" not-null="true" />
+            </key>
+            <one-to-many class="entity.OrderDetail" />
+        </set>
+    </class>
+</hibernate-mapping>

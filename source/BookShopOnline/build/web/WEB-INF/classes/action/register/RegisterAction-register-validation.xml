@@ -1,0 +1,59 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    <!--username validation-->
+    <field name="username">
+        <field-validator type="requiredstring">
+            <param name="trim">false</param>
+            <message key="username.required"/>
+        </field-validator>
+        <field-validator type="stringlength">
+            <param name="minLength">6</param>
+            <param name="maxLength">128</param>
+            <message key="username.length"/>
+        </field-validator>
+        <field-validator type="regex">
+            <param name="expression">[A-Z,a-z,0-9]</param>
+            <message key="username.nonspace"/>
+        </field-validator>
+    </field>
+     
+    <!--password validation-->
+    <field name="password">
+        <field-validator type="requiredstring">
+            <message>Yêu cầu nhập mật khẩu</message>
+        </field-validator>
+        <field-validator type="stringlength">
+            <param name="minLength">6</param>
+            <message>Mật khẩu ít nhất 6 ký tự</message>
+        </field-validator>
+    </field>
+    
+    <!--email validation-->
+    <field name="email">
+        <field-validator type="email">
+            <message>Email không đúng định dạng</message>
+        </field-validator>
+    </field>
+    
+    <!--name validation-->
+    <field name="name">
+        <field-validator type="requiredstring">
+            <message>Yêu cầu nhập tên của bạn</message>
+        </field-validator>
+    </field>
+    
+    <!--address validation-->
+    <field name="address">
+        <field-validator type="requiredstring">
+            <message>Yêu cầu nhập địa chỉ</message>
+        </field-validator>
+    </field>
+    
+    <!--phone validation-->
+    <field name="phone">
+        <field-validator type="requiredstring">
+            <message>Yêu cầu nhập số điện thoại</message>
+        </field-validator>
+    </field>
+</validators>
