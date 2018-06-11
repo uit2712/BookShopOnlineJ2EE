@@ -10,7 +10,7 @@
 <div class="navbar-collapse collapse" id="navigation">
     <ul class="nav navbar-nav navbar-left">
         <li class="active">
-            <a href="index.html">Trang chủ</a>
+            <s:a action="home.action">Trang chủ</s:a>
         </li>
         <s:iterator value="lstCategory">
             <li>

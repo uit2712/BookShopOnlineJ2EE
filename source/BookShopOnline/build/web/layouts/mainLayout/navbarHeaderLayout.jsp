@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
+
 <%
     // Khai báo các biến dùng cho trang này
     String rootPath = request.getContextPath();
@@ -26,7 +28,13 @@
             <i class="fa fa-search"></i>
         </button>
         <a class="btn btn-default navbar-toggle" href="basket.html">
-            <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">3 items in cart</span>
+            <i class="fa fa-shopping-cart"></i>  
+            <s:if test="%{#session.totalBook == null}">
+                <span class="hidden-xs">0 sản phẩm</span>
+            </s:if> 
+            <s:else>
+                <span class="hidden-xs"><s:property value='#session.totalBook'/> sản phẩm</span>
+            </s:else>
         </a>
     </div>
 </div>

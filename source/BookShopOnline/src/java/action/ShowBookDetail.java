@@ -9,10 +9,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import dao.BookDAO;
-import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
 import model.BookDetailModel;
-import org.apache.struts2.ServletActionContext;
 
 /**
  *

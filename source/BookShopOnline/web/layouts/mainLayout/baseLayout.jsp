@@ -170,6 +170,15 @@
         <script src="js/bootstrap-hover-dropdown.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/front.js"></script>
+        <script>
+            $(window).load(function () {
+                var totalBill = 0;
+                $(".total-price").each(function () {
+                    totalBill += parseInt($(this).text().replace(/\./g, '').replace(/\đ/g, '').replace(/\ /g, ''));
+                });
+                $("#total-bill").text(totalBill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " đ");
+            });
+        </script>
 
     </body>
 

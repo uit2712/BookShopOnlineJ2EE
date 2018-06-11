@@ -17,6 +17,19 @@ public class BookDetailModel {
     private long price;
     private String image;
     private Integer categoryId;
+    private Integer quanlity;
+    
+    public BookDetailModel() {
+        this.quanlity = 1;
+    }
+
+    public Integer getQuanlity() {
+        return quanlity;
+    }
+
+    public void setQuanlity(Integer quanlity) {
+        this.quanlity = quanlity;
+    }
 
     public int getBookId() {
         return bookId;

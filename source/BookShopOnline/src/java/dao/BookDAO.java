@@ -39,7 +39,7 @@ public class BookDAO {
     public Map<String, List> getProductsInCategory() {
         session = sessionFactory.openSession();
         Transaction tx = null;
-        Map<String, List> mapBooks = new HashMap<String, List>();
+        Map<String, List> mapBooks = new HashMap<>();
         List<Category> categories = new ArrayList<>();
         String query = "";
 
@@ -54,8 +54,8 @@ public class BookDAO {
                 query = "FROM Book WHERE categoryID = '" + category.getCategoryID() + "'";
                 qr = session.createQuery(query);
                 List<Book> books = qr.list();
-                if(books.size() > 0) 
-                    mapBooks.put(category.getCategoryName(), books);      
+                if(books.size() > 0)
+                    mapBooks.put(category.getCategoryName(), books);   
             }
             
             tx.commit();

@@ -7,9 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <ul class="menu">
-    <s:if test="%{#session.username == false}">
-        <li>hahaha</li>
-    </s:if>
     <s:if test="%{#session.username == null}">
         <li>
             <s:a action="login-view.action">Đăng nhập</s:a>

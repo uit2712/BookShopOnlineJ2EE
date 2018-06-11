@@ -8,6 +8,6 @@
 
 <div class="container">
     <div class="box">
-        <h1>404 PAGE NOT FOUND!</h1>
+        <h1>404 Không tìm thấy trang!</h1>
     </div>
 </div>

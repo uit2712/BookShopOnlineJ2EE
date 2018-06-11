@@ -38,4 +38,14 @@
         <put-attribute name="title" value="Không tìm thấy trang"/>
         <put-attribute name="bodyLayout" value="/errors/pageNotFound.jsp" />
     </definition>
+    
+    <definition name="error.processError" extends="baseLayout">
+        <put-attribute name="title" value="Lỗi xử lý"/>
+        <put-attribute name="bodyLayout" value="/errors/processError.jsp" />
+    </definition>
+    
+    <definition name="basket.addBook" extends="baseLayout">
+        <put-attribute name="title" value="Giỏ hàng"/>
+        <put-attribute name="bodyLayout" value="/pages/basket.jsp" />
+    </definition>
 </tiles-definitions>

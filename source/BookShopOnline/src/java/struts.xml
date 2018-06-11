@@ -67,5 +67,15 @@
             <result name="error" type="tiles">error.pageNotFound</result>
         </action>
         <!--END GetBookDetail-->
+        
+        <!--START Basket-->
+        <action name="addBooksToBasket" class="action.basket.AddBooksToBasketAction" method="addBooksToBasket">
+            <result name="success" type="redirectAction">basketView</result>
+        </action>
+        
+        <action name="basketView" class="action.basket.ShowBasketAction" method="showBasket">
+            <result name="success" type="tiles">basket.addBook</result>
+        </action>
+        <!--END Basket-->
     </package>
 </struts>

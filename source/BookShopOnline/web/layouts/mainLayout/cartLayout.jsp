@@ -5,6 +5,16 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
+
 <div class="navbar-collapse collapse right" id="basket-overview">
-    <a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">3 items in cart</span></a>
+    <s:a action="basketView.action" cssClass="btn btn-primary navbar-btn">
+        <i class="fa fa-shopping-cart"></i>
+        <s:if test="%{#session.totalBook == null}">
+            <span class="hidden-xs">0 sản phẩm</span>
+        </s:if> 
+        <s:else>
+            <span class="hidden-xs"><s:property value='#session.totalBook'/> sản phẩm</span>
+        </s:else>
+    </s:a>
 </div>
