@@ -1,7 +1,6 @@
 package entity;
 // Generated May 25, 2018 11:12:04 PM by Hibernate Tools 4.3.1
 
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,23 +9,21 @@ import java.util.Set;
  */
 public class Book {
 
-
-     private int bookId;
-     private User user;
-     private String bookName;
-     private String author;
-     private String describe;
-     private long price;
-     private int inventoryNumber;
-     private String publisher;
-     private String image;
-     private Integer categoryId;
-     private Set orderDetails = new HashSet(0);
+    private int bookId;
+    private User user;
+    private String bookName;
+    private String author;
+    private String describe;
+    private long price;
+    private int inventoryNumber;
+    private String publisher;
+    private String image;
+    private Integer categoryId;
+    private Set orderDetails = new HashSet(0);
 
     public Book() {
     }
 
-	
     public Book(int bookId, String bookName, String author, String describe, long price, int inventoryNumber, String image) {
         this.bookId = bookId;
         this.bookName = bookName;
@@ -36,101 +33,107 @@ public class Book {
         this.inventoryNumber = inventoryNumber;
         this.image = image;
     }
+
     public Book(int bookId, User user, String bookName, String author, String describe, long price, int inventoryNumber, String publisher, String image, Integer categoryId, Set orderDetails) {
-       this.bookId = bookId;
-       this.user = user;
-       this.bookName = bookName;
-       this.author = author;
-       this.describe = describe;
-       this.price = price;
-       this.inventoryNumber = inventoryNumber;
-       this.publisher = publisher;
-       this.image = image;
-       this.categoryId = categoryId;
-       this.orderDetails = orderDetails;
+        this.bookId = bookId;
+        this.user = user;
+        this.bookName = bookName;
+        this.author = author;
+        this.describe = describe;
+        this.price = price;
+        this.inventoryNumber = inventoryNumber;
+        this.publisher = publisher;
+        this.image = image;
+        this.categoryId = categoryId;
+        this.orderDetails = orderDetails;
     }
-   
+
     public int getBookId() {
         return this.bookId;
     }
-    
+
     public void setBookId(int bookId) {
         this.bookId = bookId;
     }
+
     public User getUser() {
         return this.user;
     }
-    
+
     public void setUser(User user) {
         this.user = user;
     }
+
     public String getBookName() {
         return this.bookName;
     }
-    
+
     public void setBookName(String bookName) {
         this.bookName = bookName;
     }
+
     public String getAuthor() {
         return this.author;
     }
-    
+
     public void setAuthor(String author) {
         this.author = author;
     }
+
     public String getDescribe() {
         return this.describe;
     }
-    
+
     public void setDescribe(String describe) {
         this.describe = describe;
     }
+
     public long getPrice() {
         return this.price;
     }
-    
+
     public void setPrice(long price) {
         this.price = price;
     }
+
     public int getInventoryNumber() {
         return this.inventoryNumber;
     }
-    
+
     public void setInventoryNumber(int inventoryNumber) {
         this.inventoryNumber = inventoryNumber;
     }
+
     public String getPublisher() {
         return this.publisher;
     }
-    
+
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
+
     public String getImage() {
         return this.image;
     }
-    
+
     public void setImage(String image) {
         this.image = image;
     }
+
     public Integer getCategoryId() {
         return this.categoryId;
     }
-    
+
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
+
     public Set getOrderDetails() {
         return this.orderDetails;
     }
-    
+
     public void setOrderDetails(Set orderDetails) {
         this.orderDetails = orderDetails;
     }
 
-
-
-
 }
-
-

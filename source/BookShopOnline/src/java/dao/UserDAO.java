@@ -33,10 +33,7 @@ public class UserDAO {
     private Session session;
 
     public UserDAO() {
-        if (sessionFactory == null) {
-            sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-        }
-        
+        sessionFactory = HibernateUtil.getSessionFactory();
         md5 = new MD5Assets();
     }
 

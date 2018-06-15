@@ -177,6 +177,8 @@
                     totalBill += parseInt($(this).text().replace(/\./g, '').replace(/\đ/g, '').replace(/\ /g, ''));
                 });
                 $("#total-bill").text(totalBill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " đ");
+                $("#total-books-price").text(totalBill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " đ");
+                $("#total-order").text(totalBill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " đ");
             });
         </script>
 

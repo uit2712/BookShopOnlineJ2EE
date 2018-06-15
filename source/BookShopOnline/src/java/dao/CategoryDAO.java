@@ -21,19 +21,17 @@ import org.hibernate.cfg.Configuration;
  * @author Administrator
  */
 public class CategoryDAO {
-    private SessionFactory sessionfactory = null;
+    private SessionFactory sessionFactory = null;
 
     @SessionTarget
     private Session session;
 
     public CategoryDAO() {
-        if (sessionfactory == null) {
-            sessionfactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-        }
+        sessionFactory = HibernateUtil.getSessionFactory();
     }
 
     public List<Category> getAllCategory() {
-        session = sessionfactory.openSession();
+        session = sessionFactory.openSession();
         Transaction tx = null;
         List<Category> categories = new ArrayList<>();
 

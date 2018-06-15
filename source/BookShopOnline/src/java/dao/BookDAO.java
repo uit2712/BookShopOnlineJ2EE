@@ -31,9 +31,7 @@ public class BookDAO {
     private Session session;
 
     public BookDAO() {
-        if (sessionFactory == null) {
-            sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-        }
+        sessionFactory = HibernateUtil.getSessionFactory();
     }
 
     public Map<String, List> getProductsInCategory() {

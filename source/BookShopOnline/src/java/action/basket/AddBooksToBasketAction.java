@@ -68,6 +68,11 @@ implements ModelDriven<BookInBasketModel>, Preparable {
         }
         
         dao.addBooksToBasket(book, basket);
+        // thiết lập lại giỏ hàng trong csdl
+        if(ActionContext.getContext().getSession().containsKey("username")){
+            String username = (String) ActionContext.getContext().getSession().get("username");
+            dao.setListBooksInOrderDetail(basket, username);
+        }
         totalBook = dao.getTotalBook(basket);
         ActionContext.getContext().getSession().put("basket", basket);
         ActionContext.getContext().getSession().put("totalBook", totalBook);

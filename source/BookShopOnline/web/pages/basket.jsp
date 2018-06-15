@@ -35,28 +35,28 @@
             <form method="post" action="basketView.action" onkeydown="return event.keyCode != 13">
 
                 <h1>Giỏ hàng</h1>
-                <p class="text-muted">Bạn hiện có <b><u><s:property value="totalBook"/></u></b> cuốn sách trong giỏ.</p>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Ảnh bìa</th>
-                                <th>Tên sách</th>
-                                <th>Số lượng</th>
-                                <th>Giá</th>
-                                <th>Tổng tiền</th>
-                                <th>Xóa</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <s:if test="%{#session.basket != null}">
-                                <s:iterator value="lstProducts" var="book" status="b">
+                <s:if test="%{#session.totalBook > 0}">
+                    <p class="text-muted">Bạn hiện có <b><u><s:property value="totalBook"/></u></b> cuốn sách trong giỏ.</p>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Ảnh bìa</th>
+                                    <th>Tên sách</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <s:iterator value="model" var="book" status="b">
                                     <!--Thiết lập các thuộc tính cho sách-->
-                                    <s:hidden name="lstProducts[%{#b.index}].bookId" value="%{#book.bookId}"/>
-                                    <s:hidden name="lstProducts[%{#b.index}].bookName" value="%{#book.bookName}"/>
-                                    <s:hidden name="lstProducts[%{#b.index}].image" value="%{#book.image}"/>
-                                    <s:hidden name="lstProducts[%{#b.index}].price" value="%{#book.price}"/>
-                                    <tr>
+                                    <s:hidden name="model[%{#b.index}].bookId" value="%{#book.bookId}"/>
+                                    <s:hidden name="model[%{#b.index}].bookName" value="%{#book.bookName}"/>
+                                    <s:hidden name="model[%{#b.index}].image" value="%{#book.image}"/>
+                                    <s:hidden name="model[%{#b.index}].price" value="%{#book.price}"/>
+                                    <tr class="row<s:property value="%{#b.index}"/>">
                                         <td>
                                             <a href="#">
                                                 <img src="<%=rootPath%><s:property value="%{#book.image}"/>" alt="<s:property value="%{#book.bookName}"/>">
@@ -72,9 +72,11 @@
                                             <s:textfield
                                                 cssStyle="width: 70px;"
                                                 theme="simple"
-                                                name="lstProducts[%{#b.index}].quanlity"
+                                                name="model[%{#b.index}].quanlity"
+                                                id="quanlity%{#b.index}"
                                                 type="number"
                                                 value="%{#book.quanlity}"
+                                                min="0"
                                                 cssClass="form-control"
                                                 onchange="onchangeQuanlity($(this).val(), %{#book.price}, %{#book.bookId})"
                                                 oninput="onchangeQuanlity($(this).val(), %{#book.price}, %{#book.bookId})"/>
@@ -95,40 +97,55 @@
                                                 }
                                             </script>
                                         </td>
-                                        <td><a href="#"><i class="fa fa-trash-o"></i></a>
+                                        <td>
+                                            <s:a onclick="removeProduct(%{#b.index})"><i class="fa fa-trash-o"></i></s:a>
+                                            <script>
+                                                function removeProduct(index) {
+                                                    event.preventDefault();
+                                                    $(".row" + index).hide(); // ẩn đi sản phẩm được chọn
+                                                    $("#quanlity" + index).val(0); // thiết lập số lượng là 0
+                                                    $("#quanlity" + index).trigger("change");
+                                                    
+                                                    var totalBill = 0;
+                                                    $(".total-price").each(function () {
+                                                        totalBill += parseInt($(this).text().replace(/\./g, '').replace(/\đ/g, '').replace(/\ /g, ''));
+                                                    });
+                                                    $("#total-bill").text(totalBill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " đ");
+                                                }
+                                            </script>
                                         </td>
                                     </tr>
-
                                 </s:iterator>
-                            </s:if>
-                            <s:else>
-                            <label>Bạn không có sản phẩm nào trong giỏ. Tiếp tục đặt hàng</label>
-                        </s:else>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th colspan="4">Tổng</th>
-                                <th colspan="2">
-                                    <s:label id="total-bill" value="99.000 đ" theme="simple"/>
-                                </th>
-                            </tr>
-                        </tfoot>
-                    </table>
-
-                </div>
-                <!-- /.table-responsive -->
-
-                <div class="box-footer">
-                    <div class="pull-left">
-                        <s:a action="home.action" cssClass="btn btn-default"><i class="fa fa-chevron-left"></i> Tiếp tục mua</s:a>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="4">Tổng</th>
+                                    <th colspan="2">
+                                        <s:label id="total-bill" value="99.000 đ" theme="simple"/>
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
-                    <div class="pull-right">
-                        <button class="btn btn-default"><i class="fa fa-refresh"></i> Update basket</button>
-                        <button type="submit" class="btn btn-primary">Proceed to checkout <i class="fa fa-chevron-right"></i>
-                        </button>
-                    </div>
-                </div>
+                    <!-- /.table-responsive -->
 
+                    <div class="box-footer">
+                        <div class="pull-left">
+                            <s:a action="home.action" cssClass="btn btn-default"><i class="fa fa-chevron-left"></i> Tiếp tục mua</s:a>
+                            </div>
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-refresh"></i> Cập nhật giỏ hàng</button>
+                                <button class="btn btn-primary">Tiến hành đặt hàng <i class="fa fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                </s:if>
+                <s:else>
+                    <div class="text-center">
+                        <label>Bạn không có sản phẩm nào trong giỏ.</label>
+                        <s:a action="home.action" cssClass="btn btn-default"><i class="fa fa-chevron-right"></i> Tiếp tục mua</s:a>
+                    </div>
+                </s:else>
             </form>
 
         </div>
@@ -141,56 +158,30 @@
     <div class="col-md-3">
         <div class="box" id="order-summary">
             <div class="box-header">
-                <h3>Order summary</h3>
+                <h3>Đơn hàng</h3>
             </div>
-            <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
+            <p class="text-muted">Chi phí giao hàng và chi phí bổ sung được tính dựa trên các giá trị bạn đã nhập.</p>
 
             <div class="table-responsive">
                 <table class="table">
                     <tbody>
                         <tr>
-                            <td>Order subtotal</td>
-                            <th>$446.00</th>
+                            <td>Tổng tiền các sản phẩm</td>
+                            <th><s:label id="total-books-price" value="99.000 đ" theme="simple"/></th>
                         </tr>
                         <tr>
-                            <td>Shipping and handling</td>
-                            <th>$10.00</th>
-                        </tr>
-                        <tr>
-                            <td>Tax</td>
-                            <th>$0.00</th>
+                            <td>Tiền vận chuyển</td>
+                            <th>0 đ</th>
                         </tr>
                         <tr class="total">
-                            <td>Total</td>
-                            <th>$456.00</th>
+                            <td>Tổng</td>
+                            <th><s:label id="total-order" value="99.000 đ" theme="simple"/></th>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
         </div>
-
-
-        <div class="box">
-            <div class="box-header">
-                <h4>Coupon code</h4>
-            </div>
-            <p class="text-muted">If you have a coupon code, please enter it in the box below.</p>
-            <form>
-                <div class="input-group">
-
-                    <input type="text" class="form-control">
-
-                    <span class="input-group-btn">
-
-                        <button class="btn btn-primary" type="button"><i class="fa fa-gift"></i></button>
-
-                    </span>
-                </div>
-                <!-- /input-group -->
-            </form>
-        </div>
-
     </div>
     <!-- /.col-md-3 -->
 
